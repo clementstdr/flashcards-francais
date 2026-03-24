@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Flashcards — Bac de Français</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, sans-serif;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.barre {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px;
+  background: #fff;
+  border-bottom: 1px solid #ccc;
+  align-items: center;
+}
+.barre select, .barre button {
+  font-size: 15px;
+  padding: 6px 10px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+.barre button.actif { background: #ddeeff; }
+.compteur {
+  text-align: center;
+  padding: 6px;
+  font-size: 14px;
+  color: #555;
+}
+.carte {
+  flex: 1;
+  margin: 8px 12px;
+  background: #fff;
+  border: 2px solid #bbb;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  cursor: pointer;
+  overflow-y: auto;
+}
+.carte.revelee { background: #f0f0ff; border-color: #88a; }
+.carte-texte {
+  font-size: 18px;
+  text-align: center;
+  line-height: 1.5;
+  max-width: 100%;
+}
+.carte-texte .petit { font-size: 14px; color: #666; margin-top: 10px; }
+.nav {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px 12px;
+  justify-content: center;
+}
+.nav button {
+  font-size: 16px;
+  padding: 10px 18px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  flex: 1;
+  max-width: 160px;
+}
+.nav button:active { background: #eee; }
+</style>
+</head>
+<body>
+
+<div class="barre">
+  <select id="filtre">
+    <option value="Tout">Tout</option>
+    <option value="Figures de style">Figures de style</option>
+    <option value="Registres">Registres</option>
+    <option value="Mouvements">Mouvements</option>
+  </select>
+  <button id="btnMode">Mode : Normal</button>
+</div>
+
+<div class="compteur" id="compteur"></div>
+
+<div class="carte" id="carte">
+  <div class="carte-texte" id="carteTxt"></div>
+</div>
+
+<div class="nav">
+  <button id="btnPrec">⏮ Préc.</button>
+  <button id="btnMel">🔀 Mélanger</button>
+  <button id="btnSuiv">Suiv. ⏭</button>
+</div>
+
+<script>
+var CARTES = [
+  // === FIGURES DE STYLE ===
+  {nom:"Comparaison", definition:"Rapprochement via un outil de comparaison (comme, tel, ainsi que…).", exemple:"« Il est fort comme un lion. »", categorie:"Figures de style"},
+  {nom:"Métaphore", definition:"Comparaison sans outil, image implicite entre deux éléments.", exemple:"« Cet homme est un lion. »", categorie:"Figures de style"},
+  {nom:"Personnification", definition:"Attribuer des caractéristiques humaines à un objet, animal ou idée abstraite.", exemple:"« La mer murmurait doucement. »", categorie:"Figures de style"},
+  {nom:"Allégorie", definition:"Représentation concrète et imagée d'une idée abstraite, souvent prolongée.", exemple:"La Justice = femme aux yeux bandés tenant une balance.", categorie:"Figures de style"},
+  {nom:"Antithèse", definition:"Opposition de deux termes ou idées contraires dans une même phrase.", exemple:"« Je vis, je meurs ; je me brûle et me noie. » (Labé)", categorie:"Figures de style"},
+  {nom:"Oxymore", definition:"Alliance de deux mots de sens contraire dans un même groupe syntaxique.", exemple:"« Cette obscure clarté qui tombe des étoiles » (Corneille)", categorie:"Figures de style"},
+  {nom:"Chiasme", definition:"Structure croisée AB/BA qui met en valeur une symétrie ou une opposition.", exemple:"« Il faut manger pour vivre, et non vivre pour manger. » (Molière)", categorie:"Figures de style"},
+  {nom:"Antiphrase / Ironie", definition:"Dire le contraire de ce que l'on pense, dans une intention moqueuse.", exemple:"« Quel beau temps ! » (sous la pluie)", categorie:"Figures de style"},
+  {nom:"Hyperbole", definition:"Exagération dans les termes utilisés pour frapper l'imagination.", exemple:"« Je meurs de faim. »", categorie:"Figures de style"},
+  {nom:"Euphémisme", definition:"Atténuation d'une réalité désagréable par une expression adoucie.", exemple:"« Il nous a quittés » = il est mort.", categorie:"Figures de style"},
+  {nom:"Litote", definition:"Dire moins pour suggérer davantage. On affirme en niant le contraire.", exemple:"« Va, je ne te hais point. » = je t'aime (Corneille)", categorie:"Figures de style"},
+  {nom:"Gradation", definition:"Succession de termes d'intensité croissante ou décroissante.", exemple:"« Je le vis, je rougis, je pâlis à sa vue. » (Racine)", categorie:"Figures de style"},
+  {nom:"Anaphore", definition:"Répétition d'un même mot ou groupe en début de vers, phrase ou proposition.", exemple:"« Moi président… Moi président… »", categorie:"Figures de style"},
+  {nom:"Énumération / Accumulation", definition:"Liste de termes de même nature créant un effet d'abondance ou d'insistance.", exemple:"« Des bateaux, des maisons, des ponts, des rues. »", categorie:"Figures de style"},
+  {nom:"Métonymie", definition:"Remplacement d'un mot par un autre lié logiquement (contenant/contenu, cause/effet…).", exemple:"« Boire un verre » = le contenant pour le contenu.", categorie:"Figures de style"},
+  {nom:"Synecdoque", definition:"Désigner le tout par la partie ou la partie par le tout.", exemple:"« Les voiles au loin » = les bateaux.", categorie:"Figures de style"},
+  {nom:"Périphrase", definition:"Remplacer un mot par une expression plus longue qui le décrit.", exemple:"« La Ville Lumière » = Paris.", categorie:"Figures de style"},
+
+  // === REGISTRES ===
+  {nom:"Registre tragique", definition:"Fatalité, mort, impuissance face au destin. Procédés : champ lexical de la mort, exclamations, dilemme.", exemple:"Racine (Phèdre), Corneille.", categorie:"Registres"},
+  {nom:"Registre comique", definition:"Faire rire. Procédés : jeux de mots, quiproquos, répétitions, exagérations.", exemple:"Molière (Le Malade imaginaire, Les Fourberies de Scapin).", categorie:"Registres"},
+  {nom:"Registre lyrique", definition:"Expression des sentiments personnels. Procédés : 1ʳᵉ personne, exclamations, métaphores, musicalité.", exemple:"Lamartine (« Le Lac »), Musset.", categorie:"Registres"},
+  {nom:"Registre pathétique", definition:"Susciter pitié et compassion. Procédés : champ lexical de la souffrance, hyperboles, interjections.", exemple:"Hugo (Les Misérables), Zola (Germinal).", categorie:"Registres"},
+  {nom:"Registre épique", definition:"Glorifier des exploits héroïques. Procédés : hyperboles, énumérations, comparaisons grandioses.", exemple:"Hugo (« Les Châtiments »).", categorie:"Registres"},
+  {nom:"Registre fantastique", definition:"Créer le doute entre réel et surnaturel. Procédés : champ lexical de l'étrange, modalisateurs.", exemple:"Maupassant (« Le Horla »), Hoffmann.", categorie:"Registres"},
+  {nom:"Registre polémique", definition:"Critiquer, dénoncer avec véhémence. Procédés : ironie, antiphrases, vocabulaire dépréciatif.", exemple:"Voltaire (Traité sur la tolérance), Zola (« J'accuse »).", categorie:"Registres"},
+  {nom:"Registre didactique", definition:"Instruire, transmettre un savoir. Procédés : présent de vérité générale, vocabulaire technique, exemples.", exemple:"La Fontaine (Fables), Montaigne (Essais), encyclopédistes.", categorie:"Registres"},
+  {nom:"Registre satirique", definition:"Se moquer pour critiquer. Procédés : ironie, caricature, exagération.", exemple:"La Fontaine, Voltaire (Candide), Molière (Tartuffe).", categorie:"Registres"},
+
+  // === MOUVEMENTS ===
+  {nom:"Humanisme", siecle:"XVIe siècle", definition:"Confiance en l'homme, soif de savoir, retour aux textes antiques, éducation.", exemple:"Rabelais, Montaigne.", categorie:"Mouvements"},
+  {nom:"La Pléiade", siecle:"XVIe siècle", definition:"Enrichir la langue française, imiter les Anciens, élever la poésie.", exemple:"Ronsard, Du Bellay.", categorie:"Mouvements"},
+  {nom:"Baroque", siecle:"Fin XVIe – déb. XVIIe", definition:"Instabilité, illusion, mouvement, profusion ornementale, thème de la vanité.", exemple:"D'Aubigné, Saint-Amant.", categorie:"Mouvements"},
+  {nom:"Classicisme", siecle:"XVIIe siècle", definition:"Ordre, mesure, clarté, imitation des Anciens, règle des trois unités, vraisemblance.", exemple:"Molière, Racine, La Fontaine, Boileau.", categorie:"Mouvements"},
+  {nom:"Les Lumières", siecle:"XVIIIe siècle", definition:"Raison, progrès, tolérance, critique de l'absolutisme et des préjugés.", exemple:"Voltaire, Diderot, Rousseau, Montesquieu.", categorie:"Mouvements"},
+  {nom:"Romantisme", siecle:"1ʳᵉ moitié du XIXe", definition:"Exaltation du moi, sentiment de la nature, mélancolie, liberté créatrice.", exemple:"Hugo, Musset, Lamartine, Chateaubriand.", categorie:"Mouvements"},
+  {nom:"Réalisme", siecle:"Milieu du XIXe", definition:"Représentation fidèle de la réalité sociale, observation minutieuse.", exemple:"Balzac, Flaubert, Stendhal.", categorie:"Mouvements"},
+  {nom:"Naturalisme", siecle:"Fin du XIXe", definition:"Prolongement du réalisme avec démarche scientifique (hérédité, milieu).", exemple:"Zola (Les Rougon-Macquart), Maupassant.", categorie:"Mouvements"},
+  {nom:"Symbolisme", siecle:"Fin du XIXe", definition:"Suggestion plutôt que description, musicalité, symboles, monde intérieur.", exemple:"Baudelaire, Verlaine, Rimbaud, Mallarmé.", categorie:"Mouvements"},
+  {nom:"Surréalisme", siecle:"XXe siècle (dès 1924)", definition:"Écriture automatique, exploration de l'inconscient, rejet de la logique rationnelle.", exemple:"Breton, Éluard, Aragon, Desnos.", categorie:"Mouvements"},
+  {nom:"Existentialisme", siecle:"XXe siècle (1940–1960)", definition:"L'existence précède l'essence, liberté, responsabilité, absurde.", exemple:"Sartre, Camus, Beauvoir.", categorie:"Mouvements"},
+  {nom:"Nouveau Roman", siecle:"Milieu du XXe", definition:"Rejet du roman traditionnel, expérimentation formelle, remise en question de la narration.", exemple:"Robbe-Grillet, Sarraute, Butor, Duras.", categorie:"Mouvements"}
+];
+
+var cartes = CARTES.slice();
+var index = 0;
+var revelee = false;
+var modeInverse = false;
+
+var elCarte = document.getElementById("carte");
+var elTxt = document.getElementById("carteTxt");
+var elCompteur = document.getElementById("compteur");
+var elFiltre = document.getElementById("filtre");
+var elBtnMode = document.getElementById("btnMode");
+
+function filtrer() {
+  var v = elFiltre.value;
+  if (v === "Tout") cartes = CARTES.slice();
+  else cartes = CARTES.filter(function(c) { return c.categorie === v; });
+  index = 0;
+  afficher();
+}
+
+function afficher() {
+  revelee = false;
+  elCarte.classList.remove("revelee");
+  if (!cartes.length) { elTxt.innerHTML = "Aucune carte."; elCompteur.textContent = ""; return; }
+  var c = cartes[index];
+  elCompteur.textContent = "Carte " + (index + 1) + " / " + cartes.length + "  —  " + c.categorie;
+  if (modeInverse) {
+    var h = esc(c.definition);
+    if (c.exemple) h += '<div class="petit">Exemple : ' + esc(c.exemple) + '</div>';
+    elTxt.innerHTML = h;
+  } else {
+    var h = '<b>' + esc(c.nom) + '</b>';
+    if (c.siecle) h += '<div class="petit">' + esc(c.siecle) + '</div>';
+    elTxt.innerHTML = h;
+  }
+}
+
+function reveler() {
+  if (!cartes.length || revelee) return;
+  revelee = true;
+  elCarte.classList.add("revelee");
+  var c = cartes[index];
+  if (modeInverse) {
+    var h = '<b>' + esc(c.nom) + '</b>';
+    if (c.siecle) h += ' <span class="petit">(' + esc(c.siecle) + ')</span>';
+    elTxt.innerHTML = h;
+  } else {
+    var h = esc(c.definition);
+    if (c.exemple) h += '<div class="petit">Exemple : ' + esc(c.exemple) + '</div>';
+    if (c.siecle) h += '<div class="petit">Siècle : ' + esc(c.siecle) + '</div>';
+    elTxt.innerHTML = h;
+  }
+}
+
+function suivant() { if (cartes.length) { index = (index + 1) % cartes.length; afficher(); } }
+function precedent() { if (cartes.length) { index = (index - 1 + cartes.length) % cartes.length; afficher(); } }
+function melanger() {
+  for (var i = cartes.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = cartes[i]; cartes[i] = cartes[j]; cartes[j] = t;
+  }
+  index = 0;
+  afficher();
+}
+
+function basculerMode() {
+  modeInverse = !modeInverse;
+  elBtnMode.textContent = modeInverse ? "Mode : Inversé" : "Mode : Normal";
+  elBtnMode.classList.toggle("actif", modeInverse);
+  afficher();
+}
+
+function esc(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+
+elCarte.addEventListener("click", reveler);
+elFiltre.addEventListener("change", filtrer);
+document.getElementById("btnMode").addEventListener("click", basculerMode);
+document.getElementById("btnPrec").addEventListener("click", precedent);
+document.getElementById("btnSuiv").addEventListener("click", suivant);
+document.getElementById("btnMel").addEventListener("click", melanger);
+
+afficher();
+</script>
+</body>
+</html>
