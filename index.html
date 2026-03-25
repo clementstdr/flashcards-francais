@@ -252,7 +252,6 @@ function afficher() {
     elTxt.innerHTML = h;
   } else {
     var h = '<b>' + esc(c.nom) + '</b>';
-    if (c.siecle) h += '<div class="petit">' + esc(c.siecle) + '</div>';
     elTxt.innerHTML = h;
   }
 }
@@ -267,9 +266,10 @@ function reveler() {
     if (c.siecle) h += ' <span class="petit">(' + esc(c.siecle) + ')</span>';
     elTxt.innerHTML = h;
   } else {
-    var h = esc(c.definition);
+    var h = '';
+    if (c.siecle) h += esc(c.siecle) + ' — ';
+    h += esc(c.definition);
     if (c.exemple) h += '<div class="petit">Exemple : ' + esc(c.exemple) + '</div>';
-    if (c.siecle) h += '<div class="petit">Siècle : ' + esc(c.siecle) + '</div>';
     elTxt.innerHTML = h;
   }
 }
