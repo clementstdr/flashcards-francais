@@ -88,6 +88,10 @@ body {
     <option value="Figures de style">Figures de style</option>
     <option value="Registres">Registres</option>
     <option value="Mouvements">Mouvements</option>
+    <option value="Versification">Versification</option>
+    <option value="Formes poétiques">Formes poétiques</option>
+    <option value="Sonorités">Sonorités</option>
+    <option value="Lexique d'analyse">Lexique d'analyse</option>
   </select>
   <button id="btnMode">Mode : Normal</button>
 </div>
@@ -124,6 +128,8 @@ var CARTES = [
   {nom:"Métonymie", definition:"Remplacement d'un mot par un autre lié logiquement (contenant/contenu, cause/effet…).", exemple:"« Boire un verre » = le contenant pour le contenu.", categorie:"Figures de style"},
   {nom:"Synecdoque", definition:"Désigner le tout par la partie ou la partie par le tout.", exemple:"« Les voiles au loin » = les bateaux.", categorie:"Figures de style"},
   {nom:"Périphrase", definition:"Remplacer un mot par une expression plus longue qui le décrit.", exemple:"« La Ville Lumière » = Paris.", categorie:"Figures de style"},
+  {nom:"Métaphore filée", definition:"Métaphore développée sur plusieurs vers ou phrases, formant un réseau d'images cohérent.", exemple:"Le champ lexical maritime chez Hugo pour évoquer le destin.", categorie:"Figures de style"},
+  {nom:"Parallélisme", definition:"Répétition d'une même structure syntaxique pour créer un effet de symétrie.", exemple:"« Je n'ai plus que les os… Je n'ai plus que les os… » (Ronsard)", categorie:"Figures de style"},
 
   // === REGISTRES ===
   {nom:"Registre tragique", definition:"Fatalité, mort, impuissance face au destin. Procédés : champ lexical de la mort, exclamations, dilemme.", exemple:"Racine (Phèdre), Corneille.", categorie:"Registres"},
@@ -135,6 +141,7 @@ var CARTES = [
   {nom:"Registre polémique", definition:"Critiquer, dénoncer avec véhémence. Procédés : ironie, antiphrases, vocabulaire dépréciatif.", exemple:"Voltaire (Traité sur la tolérance), Zola (« J'accuse »).", categorie:"Registres"},
   {nom:"Registre didactique", definition:"Instruire, transmettre un savoir. Procédés : présent de vérité générale, vocabulaire technique, exemples.", exemple:"La Fontaine (Fables), Montaigne (Essais), encyclopédistes.", categorie:"Registres"},
   {nom:"Registre satirique", definition:"Se moquer pour critiquer. Procédés : ironie, caricature, exagération.", exemple:"La Fontaine, Voltaire (Candide), Molière (Tartuffe).", categorie:"Registres"},
+  {nom:"Registre élégiaque", definition:"Plainte mélancolique liée à la perte, au deuil, à la fuite du temps.", exemple:"", categorie:"Registres"},
 
   // === MOUVEMENTS ===
   {nom:"Humanisme", siecle:"XVIe siècle", definition:"Confiance en l'homme, soif de savoir, retour aux textes antiques, éducation.", exemple:"Rabelais, Montaigne.", categorie:"Mouvements"},
@@ -148,7 +155,70 @@ var CARTES = [
   {nom:"Symbolisme", siecle:"Fin du XIXe", definition:"Suggestion plutôt que description, musicalité, symboles, monde intérieur.", exemple:"Baudelaire, Verlaine, Rimbaud, Mallarmé.", categorie:"Mouvements"},
   {nom:"Surréalisme", siecle:"XXe siècle (dès 1924)", definition:"Écriture automatique, exploration de l'inconscient, rejet de la logique rationnelle.", exemple:"Breton, Éluard, Aragon, Desnos.", categorie:"Mouvements"},
   {nom:"Existentialisme", siecle:"XXe siècle (1940–1960)", definition:"L'existence précède l'essence, liberté, responsabilité, absurde.", exemple:"Sartre, Camus, Beauvoir.", categorie:"Mouvements"},
-  {nom:"Nouveau Roman", siecle:"Milieu du XXe", definition:"Rejet du roman traditionnel, expérimentation formelle, remise en question de la narration.", exemple:"Robbe-Grillet, Sarraute, Butor, Duras.", categorie:"Mouvements"}
+  {nom:"Nouveau Roman", siecle:"Milieu du XXe", definition:"Rejet du roman traditionnel, expérimentation formelle, remise en question de la narration.", exemple:"Robbe-Grillet, Sarraute, Butor, Duras.", categorie:"Mouvements"},
+
+  // === VERSIFICATION ===
+  // Types de vers
+  {nom:"Alexandrin", definition:"Vers de 12 syllabes, le plus noble de la poésie classique.", exemple:"« Je suis le ténébreux, le veuf, l'inconsolé » (Nerval)", categorie:"Versification"},
+  {nom:"Décasyllabe", definition:"Vers de 10 syllabes, fréquent au Moyen Âge et chez les symbolistes.", exemple:"Villon, Verlaine.", categorie:"Versification"},
+  {nom:"Octosyllabe", definition:"Vers de 8 syllabes, rythme léger et musical.", exemple:"Fréquent dans les fables et chansons.", categorie:"Versification"},
+  {nom:"Vers libre", definition:"Vers de longueur variable, sans mètre régulier. Fin XIXe siècle.", exemple:"Rimbaud, Apollinaire, Char.", categorie:"Versification"},
+  {nom:"Vers impair", definition:"Vers de 5, 7, 9 ou 11 syllabes. Privilégié par Verlaine.", exemple:"« De la musique avant toute chose » (Verlaine)", categorie:"Versification"},
+  // Décompte des syllabes
+  {nom:"Diérèse", definition:"Prononciation en deux syllabes d'une voyelle habituellement groupée en une seule. Met en relief le mot.", exemple:"li-on au lieu de lion.", categorie:"Versification"},
+  {nom:"Synérèse", definition:"Prononciation en une seule syllabe de deux voyelles habituellement séparées. Accélère le rythme.", exemple:"lion en une syllabe.", categorie:"Versification"},
+  {nom:"E muet / e caduc", definition:"Le e se prononce devant une consonne, s'élide devant une voyelle ou un h muet, ne se compte pas en fin de vers.", exemple:"", categorie:"Versification"},
+  // Rimes
+  {nom:"Rime pauvre", definition:"Un seul phonème en commun.", exemple:"vie / amie.", categorie:"Versification"},
+  {nom:"Rime suffisante", definition:"Deux phonèmes en commun.", exemple:"automne / colonne.", categorie:"Versification"},
+  {nom:"Rime riche", definition:"Trois phonèmes ou plus en commun.", exemple:"tendresse / paresse.", categorie:"Versification"},
+  {nom:"Rimes plates (suivies)", definition:"Schéma de rimes AABB.", exemple:"", categorie:"Versification"},
+  {nom:"Rimes croisées", definition:"Schéma de rimes ABAB.", exemple:"", categorie:"Versification"},
+  {nom:"Rimes embrassées", definition:"Schéma de rimes ABBA.", exemple:"", categorie:"Versification"},
+  {nom:"Rime féminine", definition:"Rime se terminant par un e muet (son doux, prolongement).", exemple:"", categorie:"Versification"},
+  {nom:"Rime masculine", definition:"Rime ne se terminant pas par un e muet (son net, ferme).", exemple:"", categorie:"Versification"},
+  // Rythme et coupes
+  {nom:"Césure", definition:"Coupe principale dans l'alexandrin, le divise en deux hémistiches de 6 syllabes (6//6).", exemple:"", categorie:"Versification"},
+  {nom:"Hémistiche", definition:"Chacune des deux moitiés de l'alexandrin, séparées par la césure.", exemple:"", categorie:"Versification"},
+  {nom:"Enjambement", definition:"La phrase déborde sur le vers suivant, effet de continuité ou fluidité.", exemple:"", categorie:"Versification"},
+  {nom:"Rejet", definition:"Un élément bref est rejeté au début du vers suivant, effet de surprise ou mise en valeur.", exemple:"", categorie:"Versification"},
+  {nom:"Contre-rejet", definition:"Un élément bref anticipe la phrase du vers suivant, effet d'attente.", exemple:"", categorie:"Versification"},
+  {nom:"Trimètre", definition:"Alexandrin coupé en trois mesures de 4 syllabes (4/4/4) – rythme ternaire romantique.", exemple:"", categorie:"Versification"},
+
+  // === FORMES POÉTIQUES ===
+  {nom:"Sonnet", definition:"14 vers : 2 quatrains + 2 tercets. Forme noble, apogée à la Renaissance et chez les symbolistes.", exemple:"Du Bellay, Ronsard.", categorie:"Formes poétiques"},
+  {nom:"Ballade", definition:"3 strophes + 1 envoi, chaque strophe se termine par un refrain. Forme médiévale.", exemple:"Villon.", categorie:"Formes poétiques"},
+  {nom:"Rondeau", definition:"Poème à forme circulaire, avec reprise du premier vers. Forme médiévale.", exemple:"", categorie:"Formes poétiques"},
+  {nom:"Ode", definition:"Poème lyrique d'inspiration élevée, souvent en strophes régulières.", exemple:"Ronsard, Hugo.", categorie:"Formes poétiques"},
+  {nom:"Fable", definition:"Récit versifié à visée morale. Alternance de vers (hétérométrie).", exemple:"La Fontaine.", categorie:"Formes poétiques"},
+  {nom:"Poème en prose", definition:"Texte poétique sans vers ni rime.", exemple:"Baudelaire (Le Spleen de Paris), Rimbaud (Illuminations).", categorie:"Formes poétiques"},
+  {nom:"Calligramme", definition:"Poème dont la disposition graphique forme un dessin.", exemple:"Apollinaire.", categorie:"Formes poétiques"},
+  // Strophes
+  {nom:"Distique", definition:"Strophe de 2 vers.", exemple:"", categorie:"Formes poétiques"},
+  {nom:"Tercet", definition:"Strophe de 3 vers.", exemple:"", categorie:"Formes poétiques"},
+  {nom:"Quatrain", definition:"Strophe de 4 vers.", exemple:"", categorie:"Formes poétiques"},
+  {nom:"Quintil", definition:"Strophe de 5 vers.", exemple:"", categorie:"Formes poétiques"},
+  {nom:"Sizain", definition:"Strophe de 6 vers.", exemple:"", categorie:"Formes poétiques"},
+  {nom:"Huitain", definition:"Strophe de 8 vers.", exemple:"", categorie:"Formes poétiques"},
+  {nom:"Dizain", definition:"Strophe de 10 vers.", exemple:"", categorie:"Formes poétiques"},
+
+  // === SONORITÉS ===
+  {nom:"Allitération", definition:"Répétition d'un même son consonantique.", exemple:"Dureté [k][t], douceur [l][m], sifflement [s].", categorie:"Sonorités"},
+  {nom:"Assonance", definition:"Répétition d'un même son vocalique.", exemple:"Musicalité, écho intérieur, harmonie.", categorie:"Sonorités"},
+  {nom:"Harmonie imitative", definition:"Les sons du vers imitent ce qu'il décrit (onomatopée élargie).", exemple:"« Pour qui sont ces serpents qui sifflent sur vos têtes » (Racine)", categorie:"Sonorités"},
+  {nom:"Paronomase", definition:"Rapprochement de mots aux sonorités proches mais au sens différent.", exemple:"« Qui se ressemble s'assemble »", categorie:"Sonorités"},
+
+  // === LEXIQUE D'ANALYSE ===
+  {nom:"Champ lexical", definition:"Ensemble de mots se rapportant à un même thème.", exemple:"Champ lexical de la mort, de la nature.", categorie:"Lexique d'analyse"},
+  {nom:"Énonciation", definition:"Qui parle ? À qui ? Le je lyrique, le destinataire, le ton adopté.", exemple:"", categorie:"Lexique d'analyse"},
+  {nom:"Topos / Motif", definition:"Thème récurrent en poésie.", exemple:"Carpe diem, tempus fugit, locus amoenus, memento mori.", categorie:"Lexique d'analyse"},
+  {nom:"Lyrisme", definition:"Expression musicale et subjective des sentiments du poète.", exemple:"", categorie:"Lexique d'analyse"},
+  {nom:"Spleen", definition:"Ennui existentiel, dégoût profond (terme baudelairien).", exemple:"Baudelaire.", categorie:"Lexique d'analyse"},
+  {nom:"Idéal", definition:"Aspiration vers la beauté, l'absolu, le sublime (opposé du spleen chez Baudelaire).", exemple:"Baudelaire.", categorie:"Lexique d'analyse"},
+  {nom:"Poétique", definition:"Art du poète, ensemble de procédés et choix esthétiques propres à un auteur ou mouvement.", exemple:"", categorie:"Lexique d'analyse"},
+  {nom:"Hétérométrie", definition:"Alternance de vers de longueurs différentes dans un même poème.", exemple:"", categorie:"Lexique d'analyse"},
+  {nom:"Isométrie", definition:"Utilisation de vers de même longueur dans un poème.", exemple:"", categorie:"Lexique d'analyse"},
+  {nom:"Blason", definition:"Poème célébrant une partie du corps ou un objet. Genre de la Renaissance.", exemple:"", categorie:"Lexique d'analyse"}
 ];
 
 var cartes = CARTES.slice();
