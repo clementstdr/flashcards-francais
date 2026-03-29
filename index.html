@@ -287,7 +287,7 @@ function afficher() {
   elCompteur.textContent = "Carte " + (index + 1) + " / " + cartes.length + "  —  " + c.categorie;
   if (modeInverse) {
     var h = esc(c.definition);
-    if (c.exemple) h += '<div class="petit">Exemple : ' + esc(c.exemple) + '</div>';
+    if (c.exemple && c.categorie !== "Nomenclature") h += '<div class="petit">Exemple : ' + esc(c.exemple) + '</div>';
     elTxt.innerHTML = h;
   } else {
     var h = '<b>' + esc(c.nom) + '</b>';
