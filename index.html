@@ -92,6 +92,7 @@ body {
     <option value="Formes poétiques">Formes poétiques</option>
     <option value="Sonorités">Sonorités</option>
     <option value="Lexique d'analyse">Lexique d'analyse</option>
+    <option value="Nomenclature">Nomenclature</option>
   </select>
   <button id="btnMode">Mode : Normal</button>
 </div>
@@ -218,7 +219,45 @@ var CARTES = [
   {nom:"Poétique", definition:"Art du poète, ensemble de procédés et choix esthétiques propres à un auteur ou mouvement.", exemple:"", categorie:"Lexique d'analyse"},
   {nom:"Hétérométrie", definition:"Alternance de vers de longueurs différentes dans un même poème.", exemple:"", categorie:"Lexique d'analyse"},
   {nom:"Isométrie", definition:"Utilisation de vers de même longueur dans un poème.", exemple:"", categorie:"Lexique d'analyse"},
-  {nom:"Blason", definition:"Poème célébrant une partie du corps ou un objet. Genre de la Renaissance.", exemple:"", categorie:"Lexique d'analyse"}
+  {nom:"Blason", definition:"Poème célébrant une partie du corps ou un objet. Genre de la Renaissance.", exemple:"", categorie:"Lexique d'analyse"},
+
+  // === NOMENCLATURE — Chimie organique ===
+  // Préfixes des alcanes
+  {nom:"méth-", definition:"Préfixe pour 1 carbone", exemple:"méthane : CH₄", categorie:"Nomenclature"},
+  {nom:"éth-", definition:"Préfixe pour 2 carbones", exemple:"éthane : C₂H₆", categorie:"Nomenclature"},
+  {nom:"prop-", definition:"Préfixe pour 3 carbones", exemple:"propane : C₃H₈", categorie:"Nomenclature"},
+  {nom:"but-", definition:"Préfixe pour 4 carbones", exemple:"butane : C₄H₁₀", categorie:"Nomenclature"},
+  {nom:"pent-", definition:"Préfixe pour 5 carbones", exemple:"pentane : C₅H₁₂", categorie:"Nomenclature"},
+  {nom:"hex-", definition:"Préfixe pour 6 carbones", exemple:"hexane : C₆H₁₄", categorie:"Nomenclature"},
+  {nom:"hept-", definition:"Préfixe pour 7 carbones", exemple:"heptane : C₇H₁₆", categorie:"Nomenclature"},
+  {nom:"oct-", definition:"Préfixe pour 8 carbones", exemple:"octane : C₈H₁₈", categorie:"Nomenclature"},
+  {nom:"non-", definition:"Préfixe pour 9 carbones", exemple:"nonane : C₉H₂₀", categorie:"Nomenclature"},
+  {nom:"déc-", definition:"Préfixe pour 10 carbones", exemple:"décane : C₁₀H₂₂", categorie:"Nomenclature"},
+  // Familles fonctionnelles
+  {nom:"Alcool (suffixe -ol)", definition:"Groupe hydroxyle —OH lié à un carbone. Formule générale : R—OH. Formule brute : CₙH₂ₙ₊₂O", exemple:"méthanol (CH₃—OH), éthanol (CH₃—CH₂—OH), propan-1-ol, propan-2-ol", categorie:"Nomenclature"},
+  {nom:"Aldéhyde (suffixe -al)", definition:"Groupe carbonyle C=O en bout de chaîne, le C porte aussi un H. Formule générale : R—CHO. Formule brute : CₙH₂ₙO. Le C fonctionnel est toujours le n°1, donc on ne précise pas sa position", exemple:"méthanal (H—CHO), éthanal (CH₃—CHO), propanal", categorie:"Nomenclature"},
+  {nom:"Cétone (suffixe -one)", definition:"Groupe carbonyle C=O à l'intérieur de la chaîne (le C est lié à deux autres C). Formule générale : R—CO—R'. Formule brute : CₙH₂ₙO. On précise la position du C=O", exemple:"propanone (acétone), butanone, pentan-3-one", categorie:"Nomenclature"},
+  {nom:"Acide carboxylique (acide ...-oïque)", definition:"Groupe carboxyle —COOH en bout de chaîne (C=O + OH sur le même C). Formule générale : R—COOH. Formule brute : CₙH₂ₙO₂. Le C fonctionnel est toujours le n°1", exemple:"acide méthanoïque, acide éthanoïque (vinaigre), acide propanoïque", categorie:"Nomenclature"},
+  // Groupes caractéristiques
+  {nom:"Groupe hydroxyle", definition:"—OH. Caractéristique de la famille des alcools", exemple:"Suffixe -ol", categorie:"Nomenclature"},
+  {nom:"Groupe carbonyle", definition:"C=O. Présent dans les aldéhydes (bout de chaîne) et les cétones (intérieur de chaîne)", exemple:"Aldéhyde : suffixe -al / Cétone : suffixe -one", categorie:"Nomenclature"},
+  {nom:"Groupe carboxyle", definition:"—COOH. Combine C=O et —OH sur le même carbone. Caractéristique des acides carboxyliques", exemple:"Suffixe acide ...-oïque", categorie:"Nomenclature"},
+  // Concepts clés
+  {nom:"Squelette carboné", definition:"Enchaînement des atomes de carbone dans une molécule organique. Peut être linéaire, ramifié ou cyclique", exemple:"", categorie:"Nomenclature"},
+  {nom:"Alcane", definition:"Molécule organique composée uniquement de C et H, avec uniquement des liaisons simples (saturé). Formule brute : CₙH₂ₙ₊₂", exemple:"méthane, éthane, propane, butane…", categorie:"Nomenclature"},
+  {nom:"Groupe alkyle", definition:"Fragment d'alcane ayant perdu un H. Suffixe -yle (-yl dans le nom composé)", exemple:"méthyl (—CH₃), éthyl (—C₂H₅), propyl (—C₃H₇)", categorie:"Nomenclature"},
+  {nom:"Cycloalcane", definition:"Alcane dont la chaîne se referme en cycle. Préfixe cyclo-. Formule brute : CₙH₂ₙ", exemple:"cyclopentane (C₅H₁₀), cyclohexane (C₆H₁₂)", categorie:"Nomenclature"},
+  {nom:"Piège aldéhyde vs cétone", definition:"Les deux ont un C=O mais : aldéhyde = C=O en bout de chaîne (suffixe -al), cétone = C=O au milieu (suffixe -one). Propanal et propanone ont la même formule brute C₃H₆O !", exemple:"propanal (CH₃CH₂CHO) ≠ propanone (CH₃COCH₃)", categorie:"Nomenclature"},
+  // Nomenclature des ramifications
+  {nom:"Règles de nomenclature", definition:"1) Chaîne la plus longue = nom de base. 2) Numéroter pour que les ramifications aient les plus petits numéros. 3) Nommer les groupes alkyles avec leur position. 4) Préfixes di-, tri-, tétra- si répétition. 5) Ordre alphabétique", exemple:"2-méthylbutane, 2,4-diméthylpentane", categorie:"Nomenclature"},
+  // Spectroscopie IR
+  {nom:"Spectroscopie IR (principe)", definition:"Technique qui identifie les groupes caractéristiques. Chaque liaison vibre à une fréquence propre et absorbe le rayonnement IR correspondant → pic (creux) sur le spectre", exemple:"Axe X : nombre d'onde σ (cm⁻¹, de 4000 à 400). Axe Y : transmittance T (%)", categorie:"Nomenclature"},
+  {nom:"Bande O—H alcool", definition:"Bande large entre 3200–3550 cm⁻¹ (alcool pur/lié). Fine vers 3600 cm⁻¹ (alcool libre/dilué)", exemple:"Plus les liaisons H sont fortes, plus la bande est large et décalée vers les bas nombres d'onde", categorie:"Nomenclature"},
+  {nom:"Bande O—H acide carboxylique", definition:"Bande très large de 2500 à 3300 cm⁻¹, recouvre la zone des C—H", exemple:"Liaisons hydrogène très fortes", categorie:"Nomenclature"},
+  {nom:"Bande C=O (carbonyle)", definition:"Pic fort et fin entre 1650–1750 cm⁻¹", exemple:"Présent dans aldéhydes, cétones et acides carboxyliques", categorie:"Nomenclature"},
+  {nom:"Bande C—H", definition:"Absorption entre 2800–3100 cm⁻¹, moyenne à forte", exemple:"Présente dans toutes les molécules organiques", categorie:"Nomenclature"},
+  {nom:"Méthode d'identification IR", definition:"1) Bande O—H large ? → alcool ou acide. 2) Pic C=O vers 1700 ? → carbonyle. 3) O—H large + C=O ? → acide carboxylique. 4) C=O seul → aldéhyde ou cétone. 5) O—H seul → alcool", exemple:"Toujours justifier en citant le nombre d'onde et l'aspect de la bande", categorie:"Nomenclature"},
+  {nom:"Zone empreinte digitale", definition:"Zone 1500–400 cm⁻¹. Complexe, propre à chaque molécule. Ne s'interprète pas bande par bande. Sert à confirmer l'identité par comparaison avec un spectre de référence", exemple:"", categorie:"Nomenclature"}
 ];
 
 var cartes = CARTES.slice();
