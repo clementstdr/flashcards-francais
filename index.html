@@ -79,6 +79,10 @@ body {
 }
 .nav button:active { background: #eee; }
 </style>
+<script>
+  window.MathJax = { tex: { inlineMath: [['$', '$']] }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
 </head>
 <body>
 
@@ -93,6 +97,7 @@ body {
     <option value="Sonorités">Sonorités</option>
     <option value="Lexique d'analyse">Lexique d'analyse</option>
     <option value="Nomenclature">Nomenclature</option>
+    <option value="Formules mathématiques">Formules mathématiques</option>
   </select>
   <button id="btnMode">Mode : Normal</button>
 </div>
@@ -257,7 +262,87 @@ var CARTES = [
   {nom:"Bande C=O (carbonyle)", definition:"Pic fort et fin entre 1650–1750 cm⁻¹", exemple:"Présent dans aldéhydes, cétones et acides carboxyliques", categorie:"Nomenclature"},
   {nom:"Bande C—H", definition:"Absorption entre 2800–3100 cm⁻¹, moyenne à forte", exemple:"Présente dans toutes les molécules organiques", categorie:"Nomenclature"},
   {nom:"Méthode d'identification IR", definition:"1) Bande O—H large ? → alcool ou acide. 2) Pic C=O vers 1700 ? → carbonyle. 3) O—H large + C=O ? → acide carboxylique. 4) C=O seul → aldéhyde ou cétone. 5) O—H seul → alcool", exemple:"Toujours justifier en citant le nombre d'onde et l'aspect de la bande", categorie:"Nomenclature"},
-  {nom:"Zone empreinte digitale", definition:"Zone 1500–400 cm⁻¹. Complexe, propre à chaque molécule. Ne s'interprète pas bande par bande. Sert à confirmer l'identité par comparaison avec un spectre de référence", exemple:"", categorie:"Nomenclature"}
+  {nom:"Zone empreinte digitale", definition:"Zone 1500–400 cm⁻¹. Complexe, propre à chaque molécule. Ne s'interprète pas bande par bande. Sert à confirmer l'identité par comparaison avec un spectre de référence", exemple:"", categorie:"Nomenclature"},
+
+  // === FORMULES MATHÉMATIQUES — Maths spécialité Première ===
+  // Algèbre — Suites arithmétiques
+  {nom:"Suite arithmétique — relation de récurrence", definition:"$u_{n+1} = u_n + r$", categorie:"Formules mathématiques"},
+  {nom:"Suite arithmétique — terme général", definition:"$u_n = u_0 + n\\,r = u_p + (n-p)\\,r$", categorie:"Formules mathématiques"},
+  {nom:"Suite arithmétique — somme des termes", definition:"$S = \\dfrac{(\\text{nb termes})\\,(u_{\\text{1er}} + u_{\\text{dernier}})}{2}$", categorie:"Formules mathématiques"},
+  {nom:"Somme des entiers $1 + 2 + \\cdots + n$", definition:"$1 + 2 + \\cdots + n = \\dfrac{n(n+1)}{2}$", categorie:"Formules mathématiques"},
+  // Algèbre — Suites géométriques
+  {nom:"Suite géométrique — relation de récurrence", definition:"$u_{n+1} = q\\,u_n$", categorie:"Formules mathématiques"},
+  {nom:"Suite géométrique — terme général", definition:"$u_n = u_0\\,q^{\\,n} = u_p\\,q^{\\,n-p}$", categorie:"Formules mathématiques"},
+  {nom:"Suite géométrique — somme (raison $q \\neq 1$)", definition:"$1 + q + q^2 + \\cdots + q^{n} = \\dfrac{1 - q^{\\,n+1}}{1 - q}$", categorie:"Formules mathématiques"},
+  {nom:"Suite géométrique — somme (forme générale)", definition:"$S = (\\text{1er terme}) \\times \\dfrac{1 - q^{\\text{nb termes}}}{1 - q}$", categorie:"Formules mathématiques"},
+  // Algèbre — Second degré
+  {nom:"Second degré — forme canonique", definition:"$f(x) = a(x - \\alpha)^2 + \\beta, \\quad \\alpha = -\\dfrac{b}{2a},\\ \\beta = f(\\alpha)$", categorie:"Formules mathématiques"},
+  {nom:"Second degré — discriminant", definition:"$\\Delta = b^2 - 4ac$", categorie:"Formules mathématiques"},
+  {nom:"Second degré — racines (Δ > 0)", definition:"$x = \\dfrac{-b \\pm \\sqrt{\\Delta}}{2a}$", categorie:"Formules mathématiques"},
+  {nom:"Second degré — racine double (Δ = 0)", definition:"$x = \\dfrac{-b}{2a}$", categorie:"Formules mathématiques"},
+  {nom:"Second degré — factorisation", definition:"$f(x) = a(x - x_1)(x - x_2)$", categorie:"Formules mathématiques"},
+  {nom:"Second degré — somme et produit des racines", definition:"$x_1 + x_2 = -\\dfrac{b}{a}, \\quad x_1 x_2 = \\dfrac{c}{a}$", categorie:"Formules mathématiques"},
+  {nom:"Second degré — sommet de la parabole", definition:"$S\\,(\\alpha\\,;\\,\\beta)$", categorie:"Formules mathématiques"},
+  // Analyse — Dérivation
+  {nom:"Nombre dérivé", definition:"$f'(a) = \\lim\\limits_{h \\to 0} \\dfrac{f(a+h) - f(a)}{h}$", categorie:"Formules mathématiques"},
+  {nom:"Équation de la tangente en $a$", definition:"$y = f'(a)\\,(x - a) + f(a)$", categorie:"Formules mathématiques"},
+  // Analyse — Dérivées usuelles
+  {nom:"Dérivée d'une constante", definition:"$(k)' = 0$", categorie:"Formules mathématiques"},
+  {nom:"Dérivée de $x$", definition:"$(x)' = 1$", categorie:"Formules mathématiques"},
+  {nom:"Dérivée de $x^n$", definition:"$(x^n)' = n\\,x^{\\,n-1}$", categorie:"Formules mathématiques"},
+  {nom:"Dérivée de $\\dfrac{1}{x}$", definition:"$\\left(\\dfrac{1}{x}\\right)' = -\\dfrac{1}{x^2}$", categorie:"Formules mathématiques"},
+  {nom:"Dérivée de $\\sqrt{x}$", definition:"$(\\sqrt{x})' = \\dfrac{1}{2\\sqrt{x}}$", categorie:"Formules mathématiques"},
+  {nom:"Dérivée de $e^x$", definition:"$(e^x)' = e^x$", categorie:"Formules mathématiques"},
+  {nom:"Dérivée de $\\cos x$", definition:"$(\\cos x)' = -\\sin x$", categorie:"Formules mathématiques"},
+  {nom:"Dérivée de $\\sin x$", definition:"$(\\sin x)' = \\cos x$", categorie:"Formules mathématiques"},
+  // Analyse — Opérations sur les dérivées
+  {nom:"Dérivée d'une somme", definition:"$(u + v)' = u' + v'$", categorie:"Formules mathématiques"},
+  {nom:"Dérivée du produit par une constante", definition:"$(k\\,u)' = k\\,u'$", categorie:"Formules mathématiques"},
+  {nom:"Dérivée d'un produit", definition:"$(uv)' = u'v + uv'$", categorie:"Formules mathématiques"},
+  {nom:"Dérivée de l'inverse", definition:"$\\left(\\dfrac{1}{v}\\right)' = -\\dfrac{v'}{v^2}$", categorie:"Formules mathématiques"},
+  {nom:"Dérivée d'un quotient", definition:"$\\left(\\dfrac{u}{v}\\right)' = \\dfrac{u'v - uv'}{v^2}$", categorie:"Formules mathématiques"},
+  {nom:"Dérivée de $u^n$", definition:"$(u^n)' = n\\,u'\\,u^{\\,n-1}$", categorie:"Formules mathématiques"},
+  {nom:"Dérivée de $e^u$", definition:"$(e^u)' = u'\\,e^u$", categorie:"Formules mathématiques"},
+  // Analyse — Fonction exponentielle
+  {nom:"Exponentielle — valeurs et signe", definition:"$e^0 = 1, \\quad e^1 = e, \\quad e^x > 0$", categorie:"Formules mathématiques"},
+  {nom:"Exponentielle — somme des exposants", definition:"$e^{a+b} = e^a \\times e^b$", categorie:"Formules mathématiques"},
+  {nom:"Exponentielle — exposant opposé", definition:"$e^{-a} = \\dfrac{1}{e^a}$", categorie:"Formules mathématiques"},
+  {nom:"Exponentielle — différence des exposants", definition:"$e^{a-b} = \\dfrac{e^a}{e^b}$", categorie:"Formules mathématiques"},
+  {nom:"Exponentielle — puissance", definition:"$(e^a)^n = e^{\\,na}$", categorie:"Formules mathématiques"},
+  // Analyse — Trigonométrie
+  {nom:"Relation $\\cos^2 + \\sin^2$", definition:"$\\cos^2 x + \\sin^2 x = 1$", categorie:"Formules mathématiques"},
+  {nom:"Trigonométrie — parité", definition:"$\\cos(-x) = \\cos x, \\quad \\sin(-x) = -\\sin x$", categorie:"Formules mathématiques"},
+  {nom:"Trigonométrie — périodicité $2\\pi$", definition:"$\\cos(x + 2\\pi) = \\cos x, \\quad \\sin(x + 2\\pi) = \\sin x$", categorie:"Formules mathématiques"},
+  {nom:"Angles associés : $\\pi - x$", definition:"$\\cos(\\pi - x) = -\\cos x, \\quad \\sin(\\pi - x) = \\sin x$", categorie:"Formules mathématiques"},
+  {nom:"Angles associés : $\\pi + x$", definition:"$\\cos(\\pi + x) = -\\cos x, \\quad \\sin(\\pi + x) = -\\sin x$", categorie:"Formules mathématiques"},
+  {nom:"Angles associés : $\\dfrac{\\pi}{2} - x$", definition:"$\\cos\\!\\left(\\dfrac{\\pi}{2} - x\\right) = \\sin x, \\quad \\sin\\!\\left(\\dfrac{\\pi}{2} - x\\right) = \\cos x$", categorie:"Formules mathématiques"},
+  {nom:"Trigonométrie — valeurs remarquables", definition:"Angles à connaître : $0,\\ \\dfrac{\\pi}{6},\\ \\dfrac{\\pi}{4},\\ \\dfrac{\\pi}{3},\\ \\dfrac{\\pi}{2}$", categorie:"Formules mathématiques"},
+  // Géométrie — Produit scalaire
+  {nom:"Produit scalaire — norme et angle", definition:"$\\vec{u} \\cdot \\vec{v} = \\lVert \\vec{u} \\rVert\\,\\lVert \\vec{v} \\rVert \\cos\\theta$", categorie:"Formules mathématiques"},
+  {nom:"Produit scalaire — coordonnées", definition:"$\\vec{u} \\cdot \\vec{v} = xx' + yy'$", categorie:"Formules mathématiques"},
+  {nom:"Produit scalaire — formule des normes", definition:"$\\vec{u} \\cdot \\vec{v} = \\dfrac{1}{2}\\left(\\lVert \\vec{u} \\rVert^2 + \\lVert \\vec{v} \\rVert^2 - \\lVert \\vec{u} - \\vec{v} \\rVert^2\\right)$", categorie:"Formules mathématiques"},
+  {nom:"Carré scalaire et norme", definition:"$\\lVert \\vec{u} \\rVert^2 = \\vec{u} \\cdot \\vec{u}, \\quad \\lVert \\vec{u} \\rVert = \\sqrt{x^2 + y^2}$", categorie:"Formules mathématiques"},
+  {nom:"Orthogonalité de deux vecteurs", definition:"$\\vec{u} \\perp \\vec{v} \\iff \\vec{u} \\cdot \\vec{v} = 0$", categorie:"Formules mathématiques"},
+  {nom:"Théorème d'Al-Kashi", definition:"$a^2 = b^2 + c^2 - 2bc\\cos A$", categorie:"Formules mathématiques"},
+  // Géométrie — Géométrie repérée
+  {nom:"Coordonnées du vecteur $\\vec{AB}$", definition:"$\\vec{AB}\\,(x_B - x_A\\,;\\, y_B - y_A)$", categorie:"Formules mathématiques"},
+  {nom:"Distance entre deux points", definition:"$AB = \\sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}$", categorie:"Formules mathématiques"},
+  {nom:"Coordonnées du milieu", definition:"$\\left(\\dfrac{x_A + x_B}{2}\\,;\\, \\dfrac{y_A + y_B}{2}\\right)$", categorie:"Formules mathématiques"},
+  {nom:"Équation cartésienne d'une droite", definition:"$ax + by + c = 0$ — directeur $(-b\\,;\\,a)$, normal $(a\\,;\\,b)$", categorie:"Formules mathématiques"},
+  {nom:"Équation d'un cercle", definition:"$(x - a)^2 + (y - b)^2 = r^2$ — centre $(a\\,;\\,b)$, rayon $r$", categorie:"Formules mathématiques"},
+  // Probabilités — Probabilités conditionnelles
+  {nom:"Probabilité conditionnelle", definition:"$P_A(B) = \\dfrac{P(A \\cap B)}{P(A)}$", categorie:"Formules mathématiques"},
+  {nom:"Probabilité d'une intersection", definition:"$P(A \\cap B) = P(A) \\times P_A(B)$", categorie:"Formules mathématiques"},
+  {nom:"Formule des probabilités totales", definition:"$P(B) = P(A)\\,P_A(B) + P(\\overline{A})\\,P_{\\overline{A}}(B)$", categorie:"Formules mathématiques"},
+  {nom:"Événements indépendants", definition:"$P(A \\cap B) = P(A) \\times P(B)$", categorie:"Formules mathématiques"},
+  {nom:"Probabilité de l'événement contraire", definition:"$P(\\overline{A}) = 1 - P(A)$", categorie:"Formules mathématiques"},
+  {nom:"Probabilité d'une union", definition:"$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$", categorie:"Formules mathématiques"},
+  // Probabilités — Variables aléatoires
+  {nom:"Espérance d'une variable aléatoire", definition:"$E(X) = \\sum x_i\\,p_i$", categorie:"Formules mathématiques"},
+  {nom:"Variance d'une variable aléatoire", definition:"$V(X) = \\sum p_i\\,(x_i - E(X))^2 = E(X^2) - [E(X)]^2$", categorie:"Formules mathématiques"},
+  {nom:"Écart-type", definition:"$\\sigma(X) = \\sqrt{V(X)}$", categorie:"Formules mathématiques"},
+  {nom:"Linéarité de l'espérance", definition:"$E(aX + b) = a\\,E(X) + b$", categorie:"Formules mathématiques"},
+  {nom:"Variance de $aX + b$", definition:"$V(aX + b) = a^2\\,V(X)$", categorie:"Formules mathématiques"}
 ];
 
 var cartes = CARTES.slice();
@@ -293,6 +378,7 @@ function afficher() {
     var h = '<b>' + esc(c.nom) + '</b>';
     elTxt.innerHTML = h;
   }
+  typesetMath();
 }
 
 function reveler() {
@@ -311,6 +397,7 @@ function reveler() {
     if (c.exemple) h += '<div class="petit">Exemple : ' + esc(c.exemple) + '</div>';
     elTxt.innerHTML = h;
   }
+  typesetMath();
 }
 
 function suivant() { if (cartes.length) { index = (index + 1) % cartes.length; afficher(); } }
@@ -332,6 +419,13 @@ function basculerMode() {
 }
 
 function esc(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+
+function typesetMath() {
+  if (window.MathJax && MathJax.typesetPromise) {
+    if (MathJax.typesetClear) MathJax.typesetClear([elTxt]);
+    MathJax.typesetPromise([elTxt]);
+  }
+}
 
 elCarte.addEventListener("click", reveler);
 elFiltre.addEventListener("change", filtrer);
