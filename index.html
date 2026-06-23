@@ -61,6 +61,13 @@ body {
   max-width: 100%;
 }
 .carte-texte .petit { font-size: 14px; color: #666; margin-top: 10px; }
+.carte-texte .intro { text-align: left; font-size: 15px; line-height: 1.45; }
+.carte-texte .intro .bloc { margin-bottom: 12px; }
+.carte-texte .intro .bloc:last-child { margin-bottom: 0; }
+.carte-texte .intro .titre-bloc { font-weight: bold; color: #335; margin-bottom: 4px; }
+.carte-texte .intro ul { margin: 0; padding-left: 18px; }
+.carte-texte .intro li { margin-bottom: 3px; }
+.carte-texte .intro .sous { margin-top: 3px; color: #444; }
 .nav {
   display: flex;
   gap: 8px;
@@ -96,6 +103,7 @@ body {
     <option value="Formes poétiques">Formes poétiques</option>
     <option value="Sonorités">Sonorités</option>
     <option value="Lexique d'analyse">Lexique d'analyse</option>
+    <option value="Intros oral">Intros oral</option>
     <option value="Nomenclature">Nomenclature</option>
     <option value="Formules mathématiques">Formules mathématiques</option>
   </select>
@@ -342,7 +350,174 @@ var CARTES = [
   {nom:"Variance d'une variable aléatoire", definition:"$V(X) = \\sum p_i\\,(x_i - E(X))^2 = E(X^2) - [E(X)]^2$", categorie:"Formules mathématiques"},
   {nom:"Écart-type", definition:"$\\sigma(X) = \\sqrt{V(X)}$", categorie:"Formules mathématiques"},
   {nom:"Linéarité de l'espérance", definition:"$E(aX + b) = a\\,E(X) + b$", categorie:"Formules mathématiques"},
-  {nom:"Variance de $aX + b$", definition:"$V(aX + b) = a^2\\,V(X)$", categorie:"Formules mathématiques"}
+  {nom:"Variance de $aX + b$", definition:"$V(aX + b) = a^2\\,V(X)$", categorie:"Formules mathématiques"},
+
+  // === INTROS ORAL ===
+  {nom:"Arthur Rimbaud — Cahiers de Douai", categorie:"Intros oral", verso:
+    '<div class="intro">' +
+      '<div class="bloc"><div class="titre-bloc">Contexte</div><ul>' +
+        '<li>Recueil écrit en 1870 par Rimbaud, alors âgé de quinze à seize ans.</li>' +
+        '<li>Composition contemporaine de la guerre franco-prussienne, déclarée en juillet 1870.</li>' +
+        '<li>Période des premières fugues de Rimbaud hors de Charleville.</li>' +
+        '<li>Rimbaud confie ces poèmes au jeune poète Paul Demeny, à Douai, à l’automne 1870.</li>' +
+        '<li>Le titre « Cahiers de Douai » est une appellation éditoriale posthume : Rimbaud ne les a ni titrés ni publiés ainsi.</li>' +
+        '<li>Poèmes restés inédits du vivant de l’auteur.</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Cadre</div><ul>' +
+        '<li>Arthur Rimbaud (1854-1891), poète précoce et révolté.</li>' +
+        '<li>Ensemble de vingt-deux poèmes qui reprennent des formes héritées (sonnet, alexandrin) tout en commençant à les subvertir.</li>' +
+        '<li>Parcours « Émancipations créatrices » : la libération du langage poétique et de la voix adolescente.</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — Ma Bohème (sonnet, sous-titre « Fantaisie »)</div>' +
+        '<div class="sous"><b>Situation :</b> Poème de vagabondage où le poète se peint en marcheur libre.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire un sonnet qui fait de l’errance et du dénuement la condition même de la création poétique.</div></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — À la musique</div>' +
+        '<div class="sous"><b>Situation :</b> Scène située sur la place de la Gare à Charleville, un soir de concert public.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire un poème satirique qui raille la bourgeoisie de province avant que le poète ne s’en détache.</div></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — Le Mal</div>' +
+        '<div class="sous"><b>Situation :</b> Sonnet directement nourri par la guerre franco-prussienne en cours.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire un sonnet qui dénonce la boucherie de la guerre et l’indifférence de Dieu face à la souffrance des hommes.</div></div>' +
+    '</div>'
+  },
+  {nom:"Blaise Cendrars — Prose du Transsibérien et de la petite Jehanne de France", categorie:"Intros oral", verso:
+    '<div class="intro">' +
+      '<div class="bloc"><div class="titre-bloc">Contexte</div><ul>' +
+        '<li>Poème publié en 1913, en pleine effervescence des avant-gardes.</li>' +
+        '<li>Blaise Cendrars est le pseudonyme de Frédéric Sauser, écrivain d’origine suisse (1887-1961).</li>' +
+        '<li>Cendrars a parcouru la Russie dans sa jeunesse, sur fond de la révolution de 1905.</li>' +
+        '<li>Œuvre conçue avec la peintre Sonia Delaunay : premier « livre simultané », un dépliant de deux mètres où texte et couleurs dialoguent.</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Cadre</div><ul>' +
+        '<li>Poème en vers libres, à la ponctuation éclatée, célébrant la modernité, la vitesse et le voyage.</li>' +
+        '<li>Parcours « Émancipations créatrices » : l’invention d’une forme poétique neuve, libérée des règles.</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — Vers 1 à 23 (ouverture du poème)</div>' +
+        '<div class="sous"><b>Situation :</b> Ce sont les tout premiers vers, qui ouvrent le récit du voyage.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire l’incipit du poème, où le poète, adolescent, évoque son départ depuis Moscou et l’élan vers l’ailleurs.</div></div>' +
+    '</div>'
+  },
+  {nom:"Étienne de La Boétie — Discours de la servitude volontaire", categorie:"Intros oral", verso:
+    '<div class="intro">' +
+      '<div class="bloc"><div class="titre-bloc">Contexte</div><ul>' +
+        '<li>Étienne de La Boétie (1530-1563), magistrat et humaniste.</li>' +
+        '<li>Texte écrit très jeune, sans doute vers dix-huit ans, en plein humanisme de la Renaissance.</li>' +
+        '<li>Œuvre non publiée du vivant de l’auteur, longtemps diffusée en manuscrit.</li>' +
+        '<li>Reprise et publiée par les protestants pendant les guerres de Religion, comme arme contre la tyrannie monarchique.</li>' +
+        '<li>La Boétie est l’ami intime de Montaigne, qui lui rend hommage dans les Essais.</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Cadre</div><ul>' +
+        '<li>Discours argumentatif qui interroge l’origine de l’obéissance aux tyrans.</li>' +
+        '<li>Thèse centrale : le tyran ne tient son pouvoir que du consentement de ceux qui le servent ; cesser de le soutenir suffirait à l’abattre.</li>' +
+        '<li>Parcours « Défendre et entretenir la liberté » : penser la liberté comme un état naturel que la servitude trahit.</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — « Pauvres et misérables peuples insensés… »</div>' +
+        '<div class="sous"><b>Situation :</b> Apostrophe indignée adressée aux peuples qui acceptent leur soumission.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire le passage où La Boétie compare le tyran à un colosse qui s’effondre de son propre poids dès qu’on cesse de le soutenir.</div></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — « La nature de l’homme est bien d’être franc… »</div>' +
+        '<div class="sous"><b>Situation :</b> Passage sur la liberté comme inclination naturelle de l’homme.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire le moment où La Boétie affirme que l’homme naît libre et montre comment les tyrans entretiennent l’ignorance.</div></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — « Ainsi le tyran asservit les sujets les uns par le moyen des autres… »</div>' +
+        '<div class="sous"><b>Situation :</b> Passage analysant le mécanisme concret de la domination.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire la description de la chaîne de complicités par laquelle le tyran fait asservir le peuple par le peuple lui-même.</div></div>' +
+    '</div>'
+  },
+  {nom:"Jean de La Fontaine — Fables, « Le Loup et le Chien »", categorie:"Intros oral", verso:
+    '<div class="intro">' +
+      '<div class="bloc"><div class="titre-bloc">Contexte</div><ul>' +
+        '<li>Jean de La Fontaine (1621-1695), poète du classicisme.</li>' +
+        '<li>Fable extraite du premier recueil des Fables, publié en 1668 et dédié au Dauphin.</li>' +
+        '<li>« Le Loup et le Chien » est la cinquième fable du livre I.</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Cadre</div><ul>' +
+        '<li>Apologue : un court récit plaisant porteur d’une leçon, selon l’idéal classique du « plaire et instruire ».</li>' +
+        '<li>Parcours « Défendre et entretenir la liberté » : la liberté préférée au confort de la servitude.</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — Fable entière</div>' +
+        '<div class="sous"><b>Situation :</b> Dialogue entre un loup affamé mais libre et un chien gras mais domestique.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire une fable où la marque du collier révèle la servitude du chien et conduit le loup à choisir la liberté plutôt que l’abondance.</div></div>' +
+    '</div>'
+  },
+  {nom:"Honoré de Balzac — La Peau de chagrin", categorie:"Intros oral", verso:
+    '<div class="intro">' +
+      '<div class="bloc"><div class="titre-bloc">Contexte</div><ul>' +
+        '<li>Honoré de Balzac (1799-1850).</li>' +
+        '<li>Roman publié en 1831, intégré ensuite aux Études philosophiques de La Comédie humaine.</li>' +
+        '<li>Œuvre où le fantastique sert une réflexion sur le désir et l’énergie vitale.</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Cadre</div><ul>' +
+        '<li>Récit construit autour d’une peau magique qui exauce les vœux de Raphaël de Valentin mais rétrécit et abrège sa vie à chaque souhait.</li>' +
+        '<li>Principe central : « Vouloir nous brûle et Pouvoir nous détruit. »</li>' +
+        '<li>Roman en trois parties : « Le Talisman », « La Femme sans cœur », « L’Agonie ».</li>' +
+        '<li>Parcours « Les romans de l’énergie, création et destruction » : le désir comme force qui crée et consume.</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — Le Talisman (la découverte de la peau)</div>' +
+        '<div class="sous"><b>Situation :</b> Scène dans le magasin d’antiquités où Raphaël, prêt à se suicider, découvre la peau.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire le passage où sont révélées les paroles mystérieuses gravées sur le talisman et le pacte qu’elles proposent.</div></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — La Femme sans cœur (la débauche)</div>' +
+        '<div class="sous"><b>Situation :</b> Au cœur d’un festin orgiaque, éloge paradoxal de la débauche.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire le passage où la débauche est érigée en art, comme une manière de brûler la vie par l’excès des sens.</div></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — L’Agonie (la mort de Raphaël)</div>' +
+        '<div class="sous"><b>Situation :</b> Scène finale où la peau, réduite à rien, condamne Raphaël.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire la mort de Raphaël, emporté par un dernier désir au moment même où le talisman s’épuise.</div></div>' +
+    '</div>'
+  },
+  {nom:"Stendhal — Le Rouge et le Noir", categorie:"Intros oral", verso:
+    '<div class="intro">' +
+      '<div class="bloc"><div class="titre-bloc">Contexte</div><ul>' +
+        '<li>Stendhal, pseudonyme d’Henri Beyle (1783-1842).</li>' +
+        '<li>Roman publié en 1830, sous-titré « Chronique de 1830 ».</li>' +
+        '<li>Peinture critique de la société française sous la Restauration.</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Cadre</div><ul>' +
+        '<li>Roman d’ascension sociale : Julien Sorel, fils de charpentier, gravit les échelons par l’ambition et la dissimulation.</li>' +
+        '<li>L’extrait est tiré du chapitre 9 du livre I, « Une soirée à la campagne ».</li>' +
+        '<li>Parcours « Les romans de l’énergie, création et destruction » : l’énergie de l’ambition comme moteur et comme danger.</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — Livre I, chapitre 9</div>' +
+        '<div class="sous"><b>Situation :</b> Julien est précepteur chez les Rênal ; la scène se déroule un soir, au jardin de Vergy.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire le passage où Julien s’impose, comme un devoir et une conquête, de prendre la main de Madame de Rênal.</div></div>' +
+    '</div>'
+  },
+  {nom:"Pierre Corneille — Le Menteur", categorie:"Intros oral", verso:
+    '<div class="intro">' +
+      '<div class="bloc"><div class="titre-bloc">Contexte</div><ul>' +
+        '<li>Pierre Corneille (1606-1684), surtout célèbre pour ses tragédies.</li>' +
+        '<li>Le Menteur, comédie en cinq actes et en vers, créée et publiée en 1644.</li>' +
+        '<li>Pièce adaptée d’une comédie espagnole de Juan Ruiz de Alarcón.</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Cadre</div><ul>' +
+        '<li>Comédie dont le héros, Dorante, est un mythomane qui invente sans cesse des récits fabuleux.</li>' +
+        '<li>Le mensonge y devient un art, une création verbale proche de la fiction théâtrale.</li>' +
+        '<li>Parcours « Mensonge et comédie » : le mensonge comme ressort comique et comme jeu de l’illusion.</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — Acte I, scène 5 (v. 263-298)</div>' +
+        '<div class="sous"><b>Situation :</b> À peine arrivé à Paris, Dorante cherche à séduire Clarice, qu’il prend pour Lucrèce.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire la tirade où Dorante invente de toutes pièces une fête somptueuse qu’il prétend avoir donnée.</div></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — Acte III, scène 3 (v. 857-898)</div>' +
+        '<div class="sous"><b>Situation :</b> Clarice s’entretient avec sa suivante Isabelle au sujet de Dorante.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire l’échange où les deux femmes démêlent la fourberie de Dorante et ses prétentions amoureuses.</div></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — Acte IV, scène 3 (v. 1168-1205)</div>' +
+        '<div class="sous"><b>Situation :</b> Nouvelle invention de Dorante, cette fois devant son valet Cliton.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire le passage où Dorante enchaîne un mensonge de plus, que Cliton commente en soulignant qu’aucune vérité ne sort jamais de sa bouche.</div></div>' +
+    '</div>'
+  },
+  {nom:"Jean Genet — Les Bonnes", categorie:"Intros oral", verso:
+    '<div class="intro">' +
+      '<div class="bloc"><div class="titre-bloc">Contexte</div><ul>' +
+        '<li>Jean Genet (1910-1986), écrivain de la marge et de la révolte.</li>' +
+        '<li>Pièce créée en 1947 dans une mise en scène de Louis Jouvet.</li>' +
+        '<li>Œuvre librement inspirée d’un fait divers, l’affaire des sœurs Papin (1933).</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Cadre</div><ul>' +
+        '<li>Deux bonnes, Claire et Solange, rejouent en l’absence de leur patronne une cérémonie où elles incarnent tour à tour Madame et l’autre, répétant son meurtre.</li>' +
+        '<li>Théâtre du jeu, du masque et de l’illusion, où le rôle se substitue au réel.</li>' +
+        '<li>Parcours « Mensonge et comédie » : le théâtre dans le théâtre, le mensonge érigé en cérémonie.</li>' +
+      '</ul></div>' +
+      '<div class="bloc"><div class="titre-bloc">Extrait — Monologue de Solange (« Madame se croyait protégée par ses barricades de fleurs… »)</div>' +
+        '<div class="sous"><b>Situation :</b> Passage proche du dénouement, après l’échec de la cérémonie meurtrière.</div>' +
+        '<div class="sous"><b>Présentation :</b> On va lire le grand monologue délirant de Solange, qui s’imagine avoir triomphé de Madame avant de s’effondrer.</div></div>' +
+    '</div>'
+  }
 ];
 
 var cartes = CARTES.slice();
@@ -370,6 +545,7 @@ function afficher() {
   if (!cartes.length) { elTxt.innerHTML = "Aucune carte."; elCompteur.textContent = ""; return; }
   var c = cartes[index];
   elCompteur.textContent = "Carte " + (index + 1) + " / " + cartes.length + "  —  " + c.categorie;
+  if (c.verso) { elTxt.innerHTML = '<b>' + esc(c.nom) + '</b>'; typesetMath(); return; }
   if (modeInverse) {
     var h = esc(c.definition);
     if (c.exemple && c.categorie !== "Nomenclature") h += '<div class="petit">Exemple : ' + esc(c.exemple) + '</div>';
@@ -386,6 +562,7 @@ function reveler() {
   revelee = true;
   elCarte.classList.add("revelee");
   var c = cartes[index];
+  if (c.verso) { elTxt.innerHTML = c.verso; typesetMath(); return; }
   if (modeInverse) {
     var h = '<b>' + esc(c.nom) + '</b>';
     if (c.siecle) h += ' <span class="petit">(' + esc(c.siecle) + ')</span>';
